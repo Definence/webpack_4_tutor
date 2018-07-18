@@ -1,10 +1,9 @@
-# react-tutor
+# webpack-4-tutor
+
 Materials:
 > https://www.valentinog.com/blog/webpack-tutorial/
 
 > https://www.valentinog.com/blog/from-gulp-to-webpack-4-tutorial/
-
-> https://www.youtube.com/watch?v=MhkGQAoc7bc&t=73s&list=PLoYCgNOIyGABj2GQSlDRjgvXtqfDxKm5b&index=2
 
 ## Initializing and setting up webpack
 
@@ -249,3 +248,67 @@ Next up create an HTML file into ./src/index.html:
 ```
 
 #### Open up ./dist/index.htmlin your browser: you should see the React component working!
+
+## Extracting CSS to a file
+
+Install the plugin and css-loader with:
+```
+npm i mini-css-extract-plugin css-loader --save-dev
+```
+
+Next up create ./src/main.css for testing things out:
+```
+body {
+    line-height: 2;
+}
+```
+
+Configure both the plugin and the loader:
+```
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }, {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true }
+          }
+        ]
+      }, {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ]
+};
+```
+
+Import the CSS in the entry point ./src/index.js:
+```
+import style from "./main.css";
+```
+
+Enter in a terminal:
+```
+npm run build
+```
