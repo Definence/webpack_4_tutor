@@ -6,6 +6,8 @@ Materials:
 
 > https://www.youtube.com/watch?v=MhkGQAoc7bc&t=73s&list=PLoYCgNOIyGABj2GQSlDRjgvXtqfDxKm5b&index=2
 
+## Initializing and setting up webpack
+
 Run in a terminal:
 ```
 npm init
@@ -21,11 +23,32 @@ Add to package.json build script:
 }
 ```
 
-Create files:
+Create files with appropriate content:
 ```
 create: webpack.config.js
 create: ./scr/index.html
 create: ./scr/index.js
+```
+
+Content for webpack.config.js:
+```
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/,
+        use: [{ loader: "html-loader", options: { minimize: true } }]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "src/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
 ```
 
 Run in a terminal:
@@ -44,4 +67,60 @@ Open up package.json and fill the script section like the following:
 Run in a terminal:
 ```
 npm run dev
+```
+
+Overriding the default output:
+```
+"scripts": {
+  "dev": "webpack --mode development ./foo/src/js/index.js --output ./foo/main.js",
+  "build": "webpack --mode production ./foo/src/js/index.js --output ./foo/main.js"
+}
+```
+
+## Transpiling Javascript ES6 with Babel
+
+Run in a terminal:
+```
+npm i babel-core babel-loader babel-preset-env --save-dev
+```
+
+Create file '.babelrc':
+```
+{
+    "presets": [
+        "env"
+    ]
+}
+```
+
+Configuring webpack.config.js for babel loader:
+```
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
+};
+```
+
+To use babel-loader without a configuration file configure your npm scripts in package.json like so:
+```
+"scripts": {
+    "dev": "webpack --mode development --module-bind js=babel-loader",
+    "build": "webpack --mode production --module-bind js=babel-loader"
+  }
+```
+
+## Setting up webpack with React
+
+Install React with:
+```
+npm i react react-dom --save-dev
 ```
