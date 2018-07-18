@@ -124,3 +124,54 @@ Install React with:
 ```
 npm i react react-dom --save-dev
 ```
+
+Add babel-preset-react:
+```
+npm i babel-preset-react --save-dev
+```
+
+Configure the preset in .babelrc:
+```
+{
+  "presets": ["env", "react"]
+}
+```
+
+## Configuring babel-loader to read .jsx if necessary:
+
+Open up webpack.config.jsand configure the loader like so:
+```
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
+};
+```
+
+To test things out you can create a dummy React component in ./src/App.js:
+```
+import React from "react";
+import ReactDOM from "react-dom";
+const App = () => {
+  return (
+    <div>
+      <p>React here!</p>
+    </div>
+  );
+};
+export default App;
+ReactDOM.render(<App />, document.getElementById("app"));
+```
+
+Next up import the component in ./src/index.js:
+```
+import App from "./App";
+```
