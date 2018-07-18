@@ -21,11 +21,27 @@ Add to package.json build script:
 }
 ```
 
-Create: webpack.config.js
-
-Create: ./scr/index.html
+Create files:
+```
+create: webpack.config.js
+create: ./scr/index.html
+create: ./scr/index.js
+```
 
 Run in a terminal:
 ```
 npm run build
+```
+
+Open up package.json and fill the script section like the following:
+```
+"scripts": {
+  "dev": "webpack --mode development",
+  "build": "webpack --mode production"
+}
+```
+
+Run in a terminal:
+```
+npm run dev
 ```
