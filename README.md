@@ -312,3 +312,23 @@ Enter in a terminal:
 ```
 npm run build
 ```
+
+## The webpack dev server
+
+To set up webpack dev server install the package with:
+```
+npm i webpack-dev-server --save-dev
+```
+
+Next up open package.jsonand adjust the scripts like the following:
+```
+"scripts": {
+  "start": "webpack-dev-server --mode development --open",
+  "build": "webpack --mode production"
+}
+```
+
+Now, by running next you’ll see webpack dev server launching your application inside the browser:
+```
+npm run start
+```
