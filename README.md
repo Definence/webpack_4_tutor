@@ -51,6 +51,24 @@ module.exports = {
 };
 ```
 
+Content for ./scr/index.html:
+```
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webpack</title>
+</head>
+<body>
+  <section class="main">
+    <h1>Hello Webpack!!</h1>
+  </section>
+</body>
+</html>
+
+```
+
 Run in a terminal:
 ```
 npm run build
@@ -175,3 +193,59 @@ Next up import the component in ./src/index.js:
 ```
 import App from "./App";
 ```
+
+## The HTML webpack plugin
+
+Add the dependencies with:
+```
+npm i html-webpack-plugin html-loader --save-dev
+```
+
+Then update the webpack configuration:
+```
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }, {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true }
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
+
+```
+
+Next up create an HTML file into ./src/index.html:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>webpack 4 quickstart</title>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
+```
+
+#### Open up ./dist/index.htmlin your browser: you should see the React component working!
