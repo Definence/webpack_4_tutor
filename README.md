@@ -340,7 +340,7 @@ publicPath: '/',
 historyApiFallback: true
 ```
 
->   https://tylermcginnis.com/react-router-cannot-get-url-refresh/
+> https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 
 Example:
 ```
@@ -390,6 +390,23 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     })
+  ]
+}
+```
+
+## To add ability to write html attrs in react app
+
+> https://github.com/insin/babel-plugin-react-html-attrs
+
+```
+npm install --save-dev babel-plugin-react-html-attrs
+```
+
+Then edit your .babelrc to include react-html-attrs:
+```
+{
+  "plugins": [
+    "react-html-attrs"
   ]
 }
 ```
