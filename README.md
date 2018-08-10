@@ -410,3 +410,25 @@ Then edit your .babelrc to include react-html-attrs:
   ]
 }
 ```
+
+## To add the rest of es6 features
+
+```
+npm install --save webpack-preset webpack-preset-babel webpack-preset-babel-stage-1
+```
+
+Config your webpack like so:
+```
+module: {
+  rules: [
+    {
+      use: {
+        loader: "babel-loader",
+        query: {
+          presets: ['react', 'es2015', 'stage-1']
+        }
+      }
+    }
+  ]
+}
+```
