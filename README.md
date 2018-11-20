@@ -399,7 +399,7 @@ module.exports = {
 > https://github.com/insin/babel-plugin-react-html-attrs
 
 ```
-npm install --save-dev babel-plugin-react-html-attrs
+npm install babel-plugin-react-html-attrs --save
 ```
 
 Then edit your .babelrc to include react-html-attrs:

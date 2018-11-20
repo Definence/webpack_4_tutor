@@ -4,6 +4,8 @@
   "description": "``` npm install --save-dev webpack ```",
   "main": "index.js",
   "dependencies": {
+    "babel-plugin-react-html-attrs": "^2.1.0",
+    "react-html-attributes": "^1.4.3",
     "webpack-preset": "^0.2.0",
     "webpack-preset-babel": "^0.2.0",
     "webpack-preset-babel-stage-1": "^0.2.0"
